@@ -1,23 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+import Loading from "./Loading";
+import useFetch from "../../Hooks/useFetch";
 
 const DataFetching = (selectedEndpoint) => {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    fetch(selectedEndpoint.endpoint)
-      .then((response) => {
-        if (!response.ok) throw Error(response.statusText);
-        return response.json();
-      })
-      .then((json) => {
-        setData(json);
-      })
-      .catch((error) => console.error("Error fetching data:", error));
-  }, [selectedEndpoint]);
+  const { loading, error, data } = useFetch(selectedEndpoint);
 
   return (
     <div>
+      {loading && <Loading />}
       {data ? (
         <ul>
           {data.map((item, index) => (
@@ -25,8 +16,9 @@ const DataFetching = (selectedEndpoint) => {
           ))}
         </ul>
       ) : (
-        <p>No data available</p>
+        <p>There is no data</p>
       )}
+      {<p>Error: {error.message}</p>}
     </div>
   );
 };
