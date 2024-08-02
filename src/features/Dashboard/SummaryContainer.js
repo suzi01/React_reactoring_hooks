@@ -1,8 +1,8 @@
 import React from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import { useData } from "../../context/dataContext";
 
-const SummaryContainer = ({ salesTotal, subscriptionsTotal }) => {
+const SummaryContainer = () => {
+  const { salesTotal, subscriptionsTotal } = useData();
   return (
     <div className="summary flex flex-row">
       <div className="card bg-indigo">
@@ -17,16 +17,4 @@ const SummaryContainer = ({ salesTotal, subscriptionsTotal }) => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    salesTotal: state.dataset.salesTotal,
-    subscriptionsTotal: state.dataset.subscriptionsTotal
-  };
-};
-
-SummaryContainer.propTypes = {
-  salesTotal: PropTypes.number.isRequired,
-  subscriptionsTotal: PropTypes.number.isRequired
-};
-
-export default connect(mapStateToProps)(SummaryContainer);
+export default SummaryContainer;

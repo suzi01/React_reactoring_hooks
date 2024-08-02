@@ -1,12 +1,13 @@
 import React from "react";
 import DashboardShell from "./features/Dashboard/DashboardShell";
-import DataFetchingContainer from "./common/components/DataFetchingContainer";
-
-
+import { DataProvider } from "./context/dataContext";
 
 const App = () => {
-  // return <DashboardShell />;
-  return <DataFetchingContainer />;
+  return (
+    <DataProvider>
+      <DashboardShell />
+    </DataProvider>
+  );
 };
 
 export default App;
