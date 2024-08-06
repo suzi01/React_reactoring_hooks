@@ -4,25 +4,32 @@ import ChartContainer from "./ChartContainer";
 import Layout from "../../common/components/Layout";
 import Main from "../../common/components/Main";
 import SummaryContainer from "./SummaryContainer";
-import { fetchDataset } from "./DashboardSlice";
+
 import Select from "../../common/components/Select";
 import { useData } from "../../context/dataContext";
 
-const DashboardShell = () => {
-  const [selectedLabel, setSelectedLabel] = useState("");
-  // constructor(props) {
-  //   super(props);
-  //   this.state = { selectedLabel: "" };
+// if (process.env.NODE_ENV === "development") {
+//   const { Server } = require("miragejs");
+//   const { sales, subscriptions } = require("../../mocks");
 
-  //   this.handleSelectChange = this.handleSelectChange.bind(this);
-  // }
-  const { data } = useData();
+//   new Server({
+//     routes() {
+//       this.namespace = process.env.REACT_APP_BASE_URL;
+//       this.get("sales/", () => sales);
+//       this.get("subscriptions/", () => subscriptions);
+//     },
+//   });
+// }
+
+const DashboardShell = ({ fetchDataset }) => {
+  const [selectedLabel, setSelectedLabel] = useState("");
 
   // componentDidMount() {
   //   this.props.fetchDataset(`${process.env.REACT_APP_BASE_URL}/totals/`);
   // }
 
   const handleSelectChange = (event) => {
+    fetchDataset(event.target.value);
     const selectedLabel = event.target.selectedOptions[0].label;
     setSelectedLabel(selectedLabel);
   };

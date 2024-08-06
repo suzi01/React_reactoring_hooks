@@ -7,7 +7,7 @@ const initialState = {
   error: "",
   salesTotal: 0,
   subscriptionsTotal: 0,
-  data: [{ timestamp: new Date().toISOString(), amount: 0 }]
+  data: [{ timestamp: new Date().toISOString(), amount: 0 }],
 };
 
 export function datasetReducer(state = initialState, action) {
@@ -27,7 +27,7 @@ export function datasetReducer(state = initialState, action) {
       /* if totals are undefined use the previous state as the default */
       const {
         salesTotal = state.salesTotal,
-        subscriptionsTotal = state.subscriptionsTotal
+        subscriptionsTotal = state.subscriptionsTotal,
       } = action.payload;
 
       return {
@@ -36,7 +36,7 @@ export function datasetReducer(state = initialState, action) {
         error: "",
         salesTotal,
         subscriptionsTotal,
-        data
+        data,
       };
     default:
       return state;
@@ -59,11 +59,11 @@ function fetchDatasetSuccess(payload) {
 }
 
 export function fetchDataset(endpoint) {
-  return function(dispatch) {
+  return function (dispatch) {
     dispatch(fetchDatasetStart());
     return fetch(endpoint)
-      .then(response => response.json())
-      .then(json => dispatch(fetchDatasetSuccess(json)))
-      .catch(error => dispatch(fetchDatasetFailure(error.message)));
+      .then((response) => response.json())
+      .then((json) => dispatch(fetchDatasetSuccess(json)))
+      .catch((error) => dispatch(fetchDatasetFailure(error.message)));
   };
 }

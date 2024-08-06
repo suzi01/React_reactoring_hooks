@@ -4,7 +4,7 @@ import Loading from "./Loading";
 import useFetch from "../../Hooks/useFetch";
 
 const DataFetching = (selectedEndpoint) => {
-  const { loading, error, data } = useFetch(selectedEndpoint);
+  const { loading, error, data } = selectedEndpoint;
 
   return (
     <div>

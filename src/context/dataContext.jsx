@@ -1,21 +1,21 @@
 import React, { createContext, useContext } from "react";
 
-import { sales } from "../mocks";
+import useFetch from "../Hooks/useFetch";
 
 const dataContext = createContext();
 
-const initialState = {
-  error: "",
-  loading: false,
-  data: sales,
-  salesTotal: 0,
-  subscriptionsTotal: 0,
-};
+// const value = {
+//   error: "",
+//   loading: false,
+//   data: sales,
+//   salesTotal: 2324,
+//   subscriptionsTotal: 12331,
+// };
 
-const DataProvider = ({ children }) => {
-  return (
-    <dataContext.Provider value={initialState}>{children}</dataContext.Provider>
-  );
+const DataProvider = ({ children, endpoint }) => {
+  const value = useFetch(endpoint);
+
+  return <dataContext.Provider value={value}>{children}</dataContext.Provider>;
 };
 
 const useData = () => {

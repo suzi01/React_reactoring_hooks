@@ -7,7 +7,7 @@ const dataReducer = (state, action) => {
     case "error":
       return { ...state, error: action.payload };
     case "data":
-      return { ...state, data: action.payload };
+      return { ...state, data: { ...action.payload } };
     default:
       return state;
   }

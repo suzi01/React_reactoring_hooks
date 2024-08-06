@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import DashboardShell from "./features/Dashboard/DashboardShell";
 import { DataProvider } from "./context/dataContext";
 
 const App = () => {
+  const [endpoint, setEndpoint] = useState("");
+
+  // console.log(endpoint);
+
   return (
-    <DataProvider>
-      <DashboardShell />
+    <DataProvider endpoint={endpoint}>
+      <DashboardShell fetchDataset={setEndpoint} />
     </DataProvider>
   );
 };
