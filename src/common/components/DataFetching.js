@@ -4,21 +4,20 @@ import Loading from "./Loading";
 import useFetch from "../../Hooks/useFetch";
 
 const DataFetching = (selectedEndpoint) => {
-  const { loading, error, data } = selectedEndpoint;
-
+  const { loading, error, data } = useFetch(selectedEndpoint);
   return (
     <div>
       {loading && <Loading />}
-      {data ? (
+      {data.dataCollected.length > 0 ? (
         <ul>
-          {data.map((item, index) => (
+          {data.dataCollected.map((item, index) => (
             <li key={index}>{`${item.timestamp} - ${item.amount}`}</li>
           ))}
         </ul>
       ) : (
         <p>There is no data</p>
       )}
-      {<p>Error: {error.message}</p>}
+      {error && <p>Error: {error.message}</p>}
     </div>
   );
 };

@@ -8,30 +8,14 @@ import SummaryContainer from "./SummaryContainer";
 import Select from "../../common/components/Select";
 import { useData } from "../../context/dataContext";
 
-// if (process.env.NODE_ENV === "development") {
-//   const { Server } = require("miragejs");
-//   const { sales, subscriptions } = require("../../mocks");
-
-//   new Server({
-//     routes() {
-//       this.namespace = process.env.REACT_APP_BASE_URL;
-//       this.get("sales/", () => sales);
-//       this.get("subscriptions/", () => subscriptions);
-//     },
-//   });
-// }
-
-const DashboardShell = ({ fetchDataset }) => {
+const DashboardShell = () => {
   const [selectedLabel, setSelectedLabel] = useState("");
-
-  // componentDidMount() {
-  //   this.props.fetchDataset(`${process.env.REACT_APP_BASE_URL}/totals/`);
-  // }
+  const { updateEndpoint } = useData();
 
   const handleSelectChange = (event) => {
-    fetchDataset(event.target.value);
     const selectedLabel = event.target.selectedOptions[0].label;
     setSelectedLabel(selectedLabel);
+    updateEndpoint(event.target.value);
   };
 
   const optionsForSelect = [

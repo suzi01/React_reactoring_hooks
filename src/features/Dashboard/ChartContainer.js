@@ -4,13 +4,9 @@ import PropTypes from "prop-types";
 import { useData } from "../../context/dataContext";
 
 const ChartContainer = ({ selectedLabel }) => {
-  // const { data: dataset } = useData();
-
   const {
     data: { dataCollected: dataset },
   } = useData();
-
-  // console.log(dataset);
 
   const chartLabels = dataset.map((dataPoint) => dataPoint.timestamp);
   const chartValues = dataset.map((dataPoint) => dataPoint.amount);

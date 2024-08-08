@@ -1,7 +1,7 @@
 import { useEffect, useReducer } from "react";
 import dataReducer from "../reducer/dataReducer";
 
-const useFetch = (endpoint) => {
+const useFetch = ({ endpoint }) => {
   const initialState = {
     error: "",
     loading: false,

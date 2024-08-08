@@ -10,11 +10,19 @@ if (process.env.NODE_ENV === "development") {
     routes() {
       this.namespace = "/api/";
       this.get("/sales/", () => {
-        return sales;
+        return {
+          dataCollected: [...sales],
+          subscriptionsTotal: 2311,
+          salesTotal: 2222,
+        };
       });
 
       this.get("/subscriptions/", () => {
-        return subscriptions;
+        return {
+          dataCollected: [...subscriptions],
+          subscriptionsTotal: 2421,
+          salesTotal: 5621,
+        };
       });
     },
   });

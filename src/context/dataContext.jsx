@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 import useFetch from "../Hooks/useFetch";
 
@@ -12,10 +12,13 @@ const dataContext = createContext();
 //   subscriptionsTotal: 12331,
 // };
 
-const DataProvider = ({ children, endpoint }) => {
+const DataProvider = ({ children }) => {
+  const [endpoint, setEndpoint] = useState("");
   const value = useFetch(endpoint);
 
-  return <dataContext.Provider value={value}>{children}</dataContext.Provider>;
+  const updateEndpoint = endpoint => setEndpoint(endpoint);
+
+  return <dataContext.Provider value={{...value, updateEndpoint}}>{children}</dataContext.Provider>;
 };
 
 const useData = () => {
